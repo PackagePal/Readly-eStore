@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: '#222222',
-        secondary: '#F5E6E0',
+        primary: '#1e3f48',
+        secondary: '#767fa7',
       },
       backgroundImage: {
         hero: "url('./img/bg_hero.svg')",
@@ -28,3 +28,4 @@ module.exports = {
   },
   plugins: [],
 };
+
