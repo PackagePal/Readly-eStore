@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-rou
 // import pages
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
+import Tracking from './pages/Tracking';
 
 // import components
 import Header from './components/Header';
@@ -19,6 +21,8 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<ProductDetails />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/tracking' element={<Tracking />}/>
       </Routes>
       <Sidebar />
       <Footer />
