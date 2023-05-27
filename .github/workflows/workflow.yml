@@ -30,6 +30,7 @@ jobs:
           
       - name: Build and Tests
         run: |
+          npm install
           npm ci
           npm run build --if-present
           npm test
