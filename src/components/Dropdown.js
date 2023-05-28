@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Dropdown = () => {
-  const [selectedOption, setSelectedOption] = useState('');
+const Dropdown = ({ onChange }) => {
+  const [pickupPoints, setPickupPoints] = useState([]);
 
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
+  useEffect(() => {
+    const fetchPickupPoints = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/pickuppoints/');
+        const data = await response.json();
+        setPickupPoints(data);
+      } catch (error) {
+        console.error('Error fetching pickup points:', error);
+      }
+    };
+
+    fetchPickupPoints();
+  }, []);
+
+  const handleDropdownChange = (event) => {
+    const selectedValue = event.target.value;
+    onChange(selectedValue);
   };
 
   return (
-    <div>
-      <select id="dropdown" className="border border-gray-300 px-3 py-2 rounded" value={selectedOption} onChange={handleSelectChange}>
-        <option value="">Selecione uma opção</option>
-        <option value="opcao1">Opção 1</option>
-        <option value="opcao2">Opção 2</option>
-        <option value="opcao3">Opção 3</option>
-      </select>
-    </div>
+    <select id="address" className="border border-gray-300 px-3 py-2 rounded" onChange={handleDropdownChange}>
+      {pickupPoints.map((pickupPoint) => (
+        <option key={pickupPoint.id} value={pickupPoint.id}>
+          {pickupPoint.name}, {pickupPoint.address}
+        </option>
+      ))}
+    </select>
   );
 };
 
