@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import Checkout from './pages/Checkout';
 import Tracking from './pages/Tracking';
+import FinalPage from './pages/FinalPage';
 
 // import components
 import Header from './components/Header';
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/product/:id' element={<ProductDetails />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/tracking' element={<Tracking />}/>
+        <Route path='/final_page/:packageId' element={<FinalPage />} />
       </Routes>
       <Sidebar />
       <Footer />

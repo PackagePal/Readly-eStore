@@ -1,14 +1,104 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 //import cart context
 import {CartContext} from '../contexts/CartContext';
 // import product context
-import {ProductContext} from '../contexts/ProductContext';
 import CartItem from '../components/CartItem';
 import Dropdown from '../components/Dropdown';
 
 const Checkout = () => {
   const {cart, total} = useContext(CartContext);
- 
+  const [selectedPickupPoint, setSelectedPickupPoint] = useState('');
+  const handleDropdownChange = (value) => {
+    setSelectedPickupPoint(value);
+  };
+  //console.log(selectedPickupPoint);
+  const postData = async (event) => {
+    event.preventDefault();
+    const packageId = generateCode();
+    const userName = document.getElementById("name").value;
+    const userEmail = document.getElementById("email").value;
+    console.log(selectedPickupPoint);
+    const pickupPointData = fetchPickupPoint();
+    const pickupPointName = pickupPointData.name;
+    const pickupPointAddress = pickupPointData.address;
+    const pickupPointCity = pickupPointData.city;
+    const pickupPointPostalCode = pickupPointData.postalCode;
+    const pickupPointLat = pickupPointData.lat;
+    const pickupPointLng = pickupPointData.lng;
+    const data = {
+      id: null,
+      packageId: packageId,
+      userName: userName,
+      userEmail: userEmail,
+      status: "PENDING",
+      pickupPoint: {
+        id: selectedPickupPoint,
+        name: pickupPointName,
+        address: pickupPointAddress,
+        city: pickupPointCity,
+        postalCode: pickupPointPostalCode,
+        lat: pickupPointLat,
+        lng: pickupPointLng
+      },
+      store: {
+        id: 2,
+        name: "Readly",
+        email: "readlyeStore@gmail.com"
+      }
+    };
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/packages/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+  
+      if (response.ok) {
+        console.log("Dados enviados com sucesso!");
+        window.location.href = `/final_page/${packageId}`;
+      } else {
+        console.log("Ocorreu um erro ao enviar os dados.");
+      }
+    } catch (error) {
+      console.log("Ocorreu um erro na solicitação:", error);
+    }
+  };
+
+
+  const generateCode = () => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code = "";
+  
+    for (let i = 0; i < 6; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      code += characters[randomIndex];
+    }
+  
+    return code;
+  };
+
+
+  const fetchPickupPoint = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/pickuppoints/${selectedPickupPoint}`
+      );
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        console.log("Ocorreu um erro ao obter os dados.");
+        return undefined;
+      }
+    } catch (error) {
+      console.log("Ocorreu um erro na solicitação:", error);
+      return undefined;
+    }
+  };
+
   return (
       <div className="bg-gray-100 min-h-screen py-40 flex text-primary">
             <div className="max-w-2xl mx-auto bg-white shadow-md p-6 w-1/2">
@@ -33,14 +123,16 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="address" className="text-gray-700 font-medium">PickUp Point</label>
-                        <Dropdown />
+                        <Dropdown onChange={handleDropdownChange} />
                     </div>
-                    <button type="submit" className="bg-primary text-white px-4 py-2 rounded">Place Order</button>
+                    <button type="submit" className="bg-primary text-white px-4 py-2 rounded" onClick={postData}>Place Order</button>
                 </form>
             </div>
         </div>
   );
 
+
+  
   
 };
 export default Checkout;
