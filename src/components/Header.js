@@ -8,6 +8,7 @@ import {BsBag} from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+  // este é o header
   const [setIsActive] = useState(false);
   const {isOpen, setIsOpen} = useContext(SidebarContext);
   const{itemAmount} = useContext(CartContext);
