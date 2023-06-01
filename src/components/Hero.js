@@ -27,7 +27,7 @@ const Hero = () => {
       </div>
       {/* image */}
       <div className='hidden lg:block'>
-        <img src={Img}/>
+        <img src={Img} all="image"/>
       </div>
     </div>
   </section>;
