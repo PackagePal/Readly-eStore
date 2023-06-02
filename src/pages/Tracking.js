@@ -6,11 +6,7 @@ const Tracking = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://192.168.160.234:8080/api/v1/packages/${packageCode}', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+      const response = await fetch(`http://192.168.160.234:8080/api/v1/packages/${packageCode}`);
       const data = await response.json();
       setPackageData(data);
     } catch (error) {

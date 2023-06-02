@@ -82,11 +82,9 @@ const Checkout = () => {
 
   const fetchPickupPoint = async () => {
     try {
-      const response = await fetch('http://192.168.160.234:8080/api/v1/pickuppoints/${selectedPickupPoint}', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+      const response = await fetch(
+        `http://192.168.160.234:8080/api/v1/pickuppoints/${selectedPickupPoint}`
+      );
   
       if (response.ok) {
         const data = await response.json();
