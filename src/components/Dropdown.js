@@ -6,7 +6,7 @@ const Dropdown = ({ onChange }) => {
   useEffect(() => {
     const fetchPickupPoints = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/pickuppoints/');
+        const response = await fetch('http://192.168.160.234:8080/api/v1/pickuppoints/');
         const data = await response.json();
         setPickupPoints(data);
       } catch (error) {

@@ -47,7 +47,7 @@ const Checkout = () => {
       }
     };
     try {
-      const response = await fetch("http://localhost:8080/api/v1/packages/", {
+      const response = await fetch("http://192.168.160.234:8080/api/v1/packages/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -83,7 +83,7 @@ const Checkout = () => {
   const fetchPickupPoint = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/pickuppoints/${selectedPickupPoint}`
+        `http://192.168.160.234:8080/api/v1/pickuppoints/${selectedPickupPoint}`
       );
   
       if (response.ok) {

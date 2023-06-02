@@ -7,7 +7,7 @@ const FinalPage = () => {
   useEffect(() => {
     const fetchPackage = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/v1/packages/${packageId}`);
+        const response = await fetch(`http://192.168.160.234:8080/api/v1/packages/${packageId}`);
         const data = await response.json();
         setPackageData(data);
       } catch (error) {
