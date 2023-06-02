@@ -17,19 +17,19 @@ import Sidebar from './components/Sidebar';
 
 const App = () => {
   const express = require('express');
-const app = express();
+  const app = express();
 
-// Configuração do middleware CORS
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+  // Configuração do middleware CORS
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
 
-// Definir suas rotas e lógica do aplicativo abaixo
-// ...
+  // Definir suas rotas e lógica do aplicativo abaixo
+  // ...
 
-module.exports = app;
+  module.exports = app;
   return <div className='overflow-hidden'>
     <Router>
       <Header />
