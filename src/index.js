@@ -9,7 +9,7 @@ import ProductProvider from './contexts/ProductContext';
 import SidebarProvider from './contexts/SidebarContext';
 import CartProvider from './contexts/CartContext';
 
-const app = require('./app');
+const app = require('./App');
 
 // Resto da configuração do servidor Express...
 
